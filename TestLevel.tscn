@@ -1,29 +1,33 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/timber-frame-barn-house.glb" type="PackedScene" id=2]
 [ext_resource path="res://chunk.shader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 
-[sub_resource type="ShaderMaterial" id=15]
+[sub_resource type="ShaderMaterial" id=2]
 
-[sub_resource type="BoxShape" id=16]
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 3.55319, 0.001, 5.81611 )
 
-[sub_resource type="ProceduralSky" id=17]
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 3.50449, 1.18019, 0.0595074 )
+
+[sub_resource type="ProceduralSky" id=4]
 sky_top_color = Color( 0.247059, 0.129412, 0.129412, 1 )
 sky_horizon_color = Color( 0.101961, 0.00392157, 0.109804, 1 )
 ground_bottom_color = Color( 0.192157, 0.113725, 0.156863, 1 )
 ground_horizon_color = Color( 0.176471, 0.129412, 0.196078, 1 )
 sun_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="Environment" id=18]
+[sub_resource type="Environment" id=5]
 background_mode = 2
-background_sky = SubResource( 17 )
+background_sky = SubResource( 4 )
 background_color = Color( 0.160784, 0.145098, 0.145098, 1 )
 background_camera_feed_id = 2
-fog_enabled = true
+ambient_light_energy = 0.0
 fog_color = Color( 0.25098, 0.12549, 0.12549, 1 )
 fog_sun_color = Color( 1, 0, 0, 1 )
 fog_depth_curve = 0.148651
@@ -31,7 +35,7 @@ fog_depth_curve = 0.148651
 [node name="Spatial" type="Spatial"]
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-material = SubResource( 20 )
+material = SubResource( 1 )
 margin_right = 1024.0
 margin_bottom = 600.0
 __meta__ = {
@@ -40,9 +44,11 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1024, 600 )
+handle_input_locally = false
+render_target_update_mode = 3
 
 [node name="Player" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1696, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100781, 4.92535 )
 
 [node name="timber-frame-barn-house" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
@@ -52,11 +58,32 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1696, 0 )
 width = 20.0
 height = 0.01
 depth = 20.0
-material = SubResource( 15 )
+material = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="ViewportContainer/Viewport/StaticBody"]
-transform = Transform( 10, 0, 0, 0, 0.005, 0, 0, 0, 10, 0, 0, 0 )
-shape = SubResource( 16 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.381045, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="ViewportContainer/Viewport/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102715, 1.58903, 5.85292 )
+shape = SubResource( 7 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="ViewportContainer/Viewport"]
-environment = SubResource( 18 )
+environment = SubResource( 5 )
+
+[node name="OmniLight" type="OmniLight" parent="ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62362, 3.84503 )
+light_color = Color( 0.803922, 0.968627, 0.996078, 1 )
+light_energy = 0.31
+light_indirect_energy = 0.0
+light_specular = 0.18
+omni_range = 4.9
+omni_attenuation = 1.27456
+
+[node name="OmniLight2" type="OmniLight" parent="ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51964, 2.485, -4.1165 )
+visible = false
+light_color = Color( 0.717647, 0.980392, 0.368627, 1 )
+light_negative = true
+omni_range = 3.7
+omni_attenuation = 1.86607

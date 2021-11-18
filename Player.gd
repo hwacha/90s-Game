@@ -1,7 +1,7 @@
 extends KinematicBody
 
 # physics
-var move_speed : float = 10.0
+var move_speed : float = 3.0
 
 # cam look
 var min_look_angle : float = -90.0

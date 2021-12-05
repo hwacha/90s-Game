@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/horror-game-floor-generator-free/source/Horror_Game_Starter_Kit.fbx" type="PackedScene" id=1]
+
+[node name="Horror_Game_Starter_Kit" instance=ExtResource( 1 )]
+
+[node name="Camera" type="Camera" parent="." index="1"]
+transform = Transform( 0.99697, -0.0532378, 0.0567075, 0.0445363, 0.988434, 0.144968, -0.0637693, -0.142003, 0.98781, -6.0809, 5.40989, 11.3502 )

@@ -47,7 +47,7 @@ material = SubResource( 1 )
 margin_right = 1024.0
 margin_bottom = 600.0
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
